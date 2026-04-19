@@ -1,128 +1,128 @@
 # Simple Task Management System
 
-ระบบจัดการงาน (Task Management) พัฒนาด้วย Angular 21
+ระบบจัดการงาน (Task Management) 
+- **Frontend:** Angular 21
+- **Backend:** Java Spring Boot + Maven
+
+---
 
 ## ข้อกำหนดเบื้องต้น (Prerequisites)
 
+### Frontend
 - Node.js 18+ 
 - Angular CLI 21+
 
+### Backend
+- JDK 18+
+- Maven 3.8+
 
-## การติดตั้ง (Installation)
+---
 
-1. Clone โปรเจค
+## การติดตั้ง Backend (Java Spring Boot)
+
+### 1. Clone โปรเจค Backend
 ```bash
-git clone <repository-url>
-cd simple-task-management-system
+git clone <backend-repository-url>
+cd simple-task-management-system-api
 ```
 
-2. ติดตั้ง dependencies
+### 2. ตรวจสอบ Java Version
+```bash
+java -version
+# ควรแสดง: openjdk version "18.x.x" หรือสูงกว่า
+```
+
+### 3. Build และ Run ด้วย Maven
+```bash
+# Build project
+mvn clean install
+
+# Run application
+mvn spring-boot:run
+```
+
+หรือ Run ด้วย JAR:
+```bash
+mvn clean package
+java -jar target/simple-task-management-system-0.0.1-SNAPSHOT.jar
+```
+
+### 4. ตรวจสอบ API
+Backend จะรันที่ `http://localhost:8080`
+
+ทดสอบ API:
+```bash
+curl http://localhost:8080/api/tasks
+```
+
+### API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/tasks` | ดึงรายการงานทั้งหมด |
+| GET | `/api/tasks/{id}` | ดึงงานตาม ID |
+| POST | `/api/tasks` | สร้างงานใหม่ |
+| PUT | `/api/tasks/{id}` | แก้ไขงาน |
+| DELETE | `/api/tasks/{id}` | ลบงาน |
+
+### Task Model (JSON)
+```json
+{
+  "id": 1,
+  "title": "Task Title",
+  "description": "Task Description",
+  "priority": "LOW | MEDIUM | HIGH",
+  "dueDate": "2026-04-20",
+  "status": "TODO | IN_PROGRESS | DONE"
+}
+```
+
+---
+
+## การติดตั้ง Frontend (Angular)
+
+### 1. Clone โปรเจค Frontend
+```bash
+git clone https://github.com/JamesJetsada/simple-task-management-system-fe.git
+cd simple-task-management-system-fe
+```
+
+### 2. ติดตั้ง dependencies
 ```bash
 npm install
 ```
 
-3. รัน development server
+### 3. รัน development server
 ```bash
 ng serve
 ```
 
-4. เปิดเบราว์เซอร์ไปที่ `http://localhost:4200`
+### 4. เปิดเบราว์เซอร์ไปที่ `http://localhost:4200`
 
+---
 
+## การตั้งค่า API URL
 
-
-## การตั้งค่า API (API Configuration)
-
-- Runing on Java SDK Version 18
-
-- Backend API running at `http://localhost:8080`
-
+แก้ไขไฟล์ `src/app/services/task.ts`:
 ```typescript
 private apiUrl = 'http://localhost:8080/api/tasks';
 ```
 
-## การสร้าง Git Repository และ Push ขึ้น GitHub
+---
 
-### 1. สร้าง Repository บน GitHub
-1. ไปที่ https://github.com
-2. คลิก **"New"** หรือ **"+"** > **"New repository"**
-3. ตั้งชื่อ Repository (เช่น `simple-task-management-system`)
-4. เลือก Public หรือ Private
-5. **ไม่ต้อง** เลือก "Add a README file" (เพราะเรามีอยู่แล้ว)
-6. คลิก **"Create repository"**
+## วิธี Run ทั้งระบบ
 
-### 2. เริ่มต้น Git ในโปรเจค (ครั้งแรก)
-
+1. **เปิด Terminal 1** - รัน Backend:
 ```bash
-# เข้าไปใน folder โปรเจค
-cd simple-task-management-system
-
-# สร้าง git repository
-git init
-
-# เพิ่มไฟล์ทั้งหมด
-git add .
-
-# Commit ครั้งแรก
-git commit -m "Initial commit: Simple Task Management System"
-
-# ตั้งชื่อ branch หลักเป็น main
-git branch -M main
-
-# เชื่อมต่อกับ GitHub (เปลี่ยน <username> เป็นชื่อ GitHub ของคุณ)
-git remote add origin https://github.com/<username>/simple-task-management-system.git
-
-# Push ขึ้น GitHub
-git push -u origin main
+cd backend-project
+mvn spring-boot:run
 ```
 
-### 3. การ Push การเปลี่ยนแปลงครั้งต่อไป
-
+2. **เปิด Terminal 2** - รัน Frontend:
 ```bash
-# ดูสถานะไฟล์ที่เปลี่ยนแปลง
-git status
-
-# เพิ่มไฟล์ที่ต้องการ commit
-git add .
-
-# หรือเพิ่มเฉพาะไฟล์
-git add src/app/components/home/home.ts
-
-# Commit พร้อมข้อความ
-git commit -m "feat: add new feature"
-
-# Push ขึ้น GitHub
-git push
+cd simple-task-management-system-fe
+ng serve
 ```
 
-### 4. ดึงโค้ดล่าสุดจาก GitHub
+3. เปิดเบราว์เซอร์ไปที่ `http://localhost:4200`
 
-```bash
-git pull origin main
-```
-
-### 5. สร้าง Branch ใหม่
-
-```bash
-# สร้างและสลับไป branch ใหม่
-git checkout -b feature/new-feature
-
-# Push branch ใหม่ขึ้น GitHub
-git push -u origin feature/new-feature
-```
-
-### Commit Message Convention
-
-แนะนำให้ใช้รูปแบบ:
-- `feat:` - เพิ่มฟีเจอร์ใหม่
-- `fix:` - แก้ bug
-- `docs:` - แก้ไขเอกสาร
-- `style:` - แก้ไข format โค้ด
-- `refactor:` - ปรับปรุงโค้ด
-
-ตัวอย่าง:
-```bash
-git commit -m "feat: add delete task function"
-git commit -m "fix: resolve date format issue"
-git commit -m "docs: update README"
-```
