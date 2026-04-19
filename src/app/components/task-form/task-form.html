@@ -1,0 +1,50 @@
+<div class="modal-content" style="align-content: center;">
+  <div class="modal-header">
+    <h3>{{ task?.id ? 'Edit Task' : 'Create Task' }}</h3>
+    <span class="close" (click)="onCancel()">✕</span>
+  </div>
+
+  <div class="form-group">
+    <label>Title</label>
+    <input [(ngModel)]="task.title" placeholder="Enter task title" />
+  </div>
+
+  <div class="form-group">
+    <label>Description</label>
+    <textarea [(ngModel)]="task.description" rows="3" placeholder="Enter task description"></textarea>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Priority</label>
+      <select [(ngModel)]="task.priority">
+        <option value="LOW">🟢 Low</option>
+        <option value="MEDIUM">🟡 Medium</option>
+        <option value="HIGH">🔴 High</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Due Date</label>
+      <input type="date" [(ngModel)]="task.dueDate" />
+    </div>
+  </div>
+
+  @if (task?.id) {
+    <div class="form-group">
+      <label>Status</label>
+      <select [(ngModel)]="task.status">
+        <option value="TODO">📋 To Do</option>
+        <option value="IN_PROGRESS">🔄 In Progress</option>
+        <option value="DONE">✅ Done</option>
+      </select>
+    </div>
+  }
+
+  <div class="actions">
+    <button class="btn-secondary" (click)="onCancel()">Cancel</button>
+    <button class="btn-primary" (click)="save()">
+      {{ task?.id ? 'Save Changes' : 'Create Task' }}
+    </button>
+  </div>
+</div>

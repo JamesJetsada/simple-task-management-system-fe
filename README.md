@@ -1,59 +1,128 @@
-# SimpleTaskManagementSystem
+# Simple Task Management System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+ระบบจัดการงาน (Task Management) พัฒนาด้วย Angular 21
 
-## Development server
+## ข้อกำหนดเบื้องต้น (Prerequisites)
 
-To start a local development server, run:
+- Node.js 18+ 
+- Angular CLI 21+
 
+
+## การติดตั้ง (Installation)
+
+1. Clone โปรเจค
+```bash
+git clone <repository-url>
+cd simple-task-management-system
+```
+
+2. ติดตั้ง dependencies
+```bash
+npm install
+```
+
+3. รัน development server
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+4. เปิดเบราว์เซอร์ไปที่ `http://localhost:4200`
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
+
+## การตั้งค่า API (API Configuration)
+
+- Runing on Java SDK Version 18
+
+- Backend API running at `http://localhost:8080`
+
+```typescript
+private apiUrl = 'http://localhost:8080/api/tasks';
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## การสร้าง Git Repository และ Push ขึ้น GitHub
+
+### 1. สร้าง Repository บน GitHub
+1. ไปที่ https://github.com
+2. คลิก **"New"** หรือ **"+"** > **"New repository"**
+3. ตั้งชื่อ Repository (เช่น `simple-task-management-system`)
+4. เลือก Public หรือ Private
+5. **ไม่ต้อง** เลือก "Add a README file" (เพราะเรามีอยู่แล้ว)
+6. คลิก **"Create repository"**
+
+### 2. เริ่มต้น Git ในโปรเจค (ครั้งแรก)
 
 ```bash
-ng generate --help
+# เข้าไปใน folder โปรเจค
+cd simple-task-management-system
+
+# สร้าง git repository
+git init
+
+# เพิ่มไฟล์ทั้งหมด
+git add .
+
+# Commit ครั้งแรก
+git commit -m "Initial commit: Simple Task Management System"
+
+# ตั้งชื่อ branch หลักเป็น main
+git branch -M main
+
+# เชื่อมต่อกับ GitHub (เปลี่ยน <username> เป็นชื่อ GitHub ของคุณ)
+git remote add origin https://github.com/<username>/simple-task-management-system.git
+
+# Push ขึ้น GitHub
+git push -u origin main
 ```
 
-## Building
-
-To build the project run:
+### 3. การ Push การเปลี่ยนแปลงครั้งต่อไป
 
 ```bash
-ng build
+# ดูสถานะไฟล์ที่เปลี่ยนแปลง
+git status
+
+# เพิ่มไฟล์ที่ต้องการ commit
+git add .
+
+# หรือเพิ่มเฉพาะไฟล์
+git add src/app/components/home/home.ts
+
+# Commit พร้อมข้อความ
+git commit -m "feat: add new feature"
+
+# Push ขึ้น GitHub
+git push
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### 4. ดึงโค้ดล่าสุดจาก GitHub
 
 ```bash
-ng test
+git pull origin main
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### 5. สร้าง Branch ใหม่
 
 ```bash
-ng e2e
+# สร้างและสลับไป branch ใหม่
+git checkout -b feature/new-feature
+
+# Push branch ใหม่ขึ้น GitHub
+git push -u origin feature/new-feature
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Commit Message Convention
 
-## Additional Resources
+แนะนำให้ใช้รูปแบบ:
+- `feat:` - เพิ่มฟีเจอร์ใหม่
+- `fix:` - แก้ bug
+- `docs:` - แก้ไขเอกสาร
+- `style:` - แก้ไข format โค้ด
+- `refactor:` - ปรับปรุงโค้ด
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+ตัวอย่าง:
+```bash
+git commit -m "feat: add delete task function"
+git commit -m "fix: resolve date format issue"
+git commit -m "docs: update README"
+```

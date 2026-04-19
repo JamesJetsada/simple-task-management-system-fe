@@ -1,0 +1,64 @@
+<div class="layout">
+
+  <!-- LOADING OVERLAY -->
+  @if (isLoading) {
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+      <span>Loading...</span>
+    </div>
+  }
+
+  <!-- HEADER -->
+  <div class="topbar">
+    <h2>Task Management</h2>
+    <button class="btn-primary" (click)="openCreate()" [disabled]="isLoading">+ Add Task</button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Priority</th>
+          <th>Due</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (task of tasks; track task.id) {
+          <tr>
+            <td>
+              <div class="task-title">{{ task.title }}</div>
+              <div class="task-desc">{{ task.description }}</div>
+            </td>
+
+            <td>
+              <span class="badge"
+                [ngClass]="task.priority">
+                {{ task.priority }}
+              </span>
+            </td>
+
+            <td>{{ formatDate(task.dueDate) }}</td>
+
+            <td>
+              <span class="status"
+                [ngClass]="task.status">
+                {{ task.status }}
+              </span>
+            </td>
+
+            <td class="actions">
+              <button (click)="openEdit(task)" [disabled]="isLoading">✏️</button>
+              <button (click)="deleteTask(task.id)" [disabled]="isLoading">🗑️</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>
